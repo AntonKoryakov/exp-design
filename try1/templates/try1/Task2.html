@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Задание 2
+{% endblock %}
+
+
+{% block content %}
+    <div>Пожалуйста, вручную напечатайте выведенный ниже текст в форму.</div>
+    <div class="form_container">
+        {% include 'try1/includes/q2_block.html' %}
+    </div>
+    <div class="form-row align-items-center">
+        <button class="answer btn btn-success" type="button">Submit</button>
+    </div>
+    {% include 'try1/includes/error_modal.html' %}
+{% endblock %}
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script>
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var ws_path = ws_scheme + '://' + window.location.host + "/task2/{{ player.id }}";
+        var socket = new ReconnectingWebSocket(ws_path);
+    </script>
+    <script src="{% static 'try1/js/task2_channel.js' %}"></script>
+
+{% endblock %}
+
